@@ -7,6 +7,7 @@ const { login, createUser } = require('./controllers/userControllers');
 const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/NotFoundError');
 const urlValidate = require('./utils/validate');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 // Слушаем 3000 порт
 const PORT = process.env.PORT || 3000;
@@ -21,6 +22,8 @@ mongoose
   });
 
 app.use(express.json());
+
+app.use(requestLogger); // подключаем логгер запросов
 
 // роуты, не требующие авторизации
 app.post('/signin', celebrate({
@@ -51,6 +54,8 @@ app.use('/cards', routerCards);
 app.use('*', () => {
   throw new NotFoundError({ message: 'Страницы не существует' });
 });
+
+app.use(errorLogger); // подключаем логгер ошибок
 
 app.use(errors());
 
