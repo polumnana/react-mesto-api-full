@@ -53,7 +53,7 @@ class authApi {
 }
 
 const apiAuth = new authApi({
-    baseUrl: 'https://auth.nomoreparties.co',
+    baseUrl: 'https://polumnana.backend.nomoredomains.sbs',
 });
 
 export default apiAuth;
