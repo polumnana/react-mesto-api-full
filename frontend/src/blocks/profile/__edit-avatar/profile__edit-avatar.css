@@ -1,0 +1,11 @@
+.profile__edit-avatar {
+    width: 26px;
+    padding: 45px;
+    border-radius: 40%;
+    max-height: 26px;
+    opacity: 0;
+}
+
+.profile__edit-avatar:hover {
+    opacity: 1;
+}

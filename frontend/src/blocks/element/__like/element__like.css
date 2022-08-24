@@ -1,0 +1,5 @@
+.element__like {
+    grid-column: 2/3;
+    margin-left: auto;
+    margin-right: 20px;
+}

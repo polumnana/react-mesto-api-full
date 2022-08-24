@@ -1,0 +1,18 @@
+.profile__button-edit {
+    display: block;
+    margin: 0 0 0 18px;
+    padding: 0;
+    cursor: pointer;
+    background: none;
+    border: 1px solid #fff;
+    min-width: 24px;
+    height: 24px;
+    align-self: center;
+}
+
+@media screen and (min-width: 320px) and (max-width: 730px) {
+    .profile__button-edit {
+        min-width: 18px;
+        height: 18px;
+    }
+}

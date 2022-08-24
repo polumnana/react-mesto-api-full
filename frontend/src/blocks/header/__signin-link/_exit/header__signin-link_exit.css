@@ -1,0 +1,8 @@
+.header__signin-link_exit {
+    color: #A9A9A9;
+}
+
+.header__signin-link_exit:hover {
+    opacity: .6;
+    transition: opacity .2s linear;
+}

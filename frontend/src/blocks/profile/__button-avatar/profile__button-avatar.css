@@ -1,0 +1,15 @@
+.profile__button-avatar {
+    grid-area: avatar;
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    position: relative;
+}
+
+@media screen and (min-width: 320px) and (max-width: 730px) {
+    .profile__button-avatar {
+        margin: 0 auto 22px;
+    }
+}

@@ -1,0 +1,8 @@
+.element {
+    display: grid;
+    grid-template-rows: 282px 57px;
+    width: 282px;
+    gap: 22px 0;
+    background-color: #fff;
+    border-radius: 10px;
+}

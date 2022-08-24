@@ -1,0 +1,6 @@
+.popup__type-input-error {
+    display: block;
+    height: 30px;
+    box-sizing: border-box;
+    margin: 0;
+}
