@@ -11,7 +11,7 @@ Repository for `Mesto` app includes frontend and backend parts with registration
 * Express;
 * MongoDB.
 
-## **Публичный IP-адрес сервера**
+## **Public IP address**
 84.201.153.204
 
 # Frontend
@@ -20,6 +20,6 @@ https://polumnana.frontend.nomoredomains.sbs/
 # Backend
 https://polumnana.backend.nomoredomains.sbs/
 
-## **Ссылки на github и github.pages**
+## **Links to github and github.pages**
 
 https://github.com/polumnana/react-mesto-api-full
