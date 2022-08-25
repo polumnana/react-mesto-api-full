@@ -5,29 +5,20 @@ class Api {
 
     fetchCards() {
         return fetch(this._baseUrl + '/cards', {
-            headers: {
-                'Authorization': this._getToken(),
-                'Content-Type': 'application/json'
-            },
+            headers: this._getHeaders(),
         }).then(this._checkResponse);
     }
 
     fetchUserInfo() {
         return fetch(this._baseUrl + '/users/me', {
-            headers: {
-                'Authorization': this._getToken(),
-                'Content-Type': 'application/json'
-            },
+            headers: this._getHeaders(),
         }).then(this._checkResponse);
     }
 
     updateUserInfo({name, about}) {
         return fetch(this._baseUrl + '/users/me', {
             method: 'PATCH',
-            headers: {
-                'Authorization': this._getToken(),
-                'Content-Type': 'application/json'
-            },
+            headers: this._getHeaders(),
             body: JSON.stringify({
                 name: name,
                 about: about
@@ -38,10 +29,7 @@ class Api {
     updateUserAvatar(userAvatar) {
         return fetch(this._baseUrl + '/users/me/avatar', {
             method: 'PATCH',
-            headers: {
-                'Authorization': this._getToken(),
-                'Content-Type': 'application/json'
-            },
+            headers: this._getHeaders(),
             body: JSON.stringify({
                 avatar: userAvatar,
             })
@@ -51,20 +39,14 @@ class Api {
     deleteCard(cardId) {
         return fetch(this._baseUrl + `/cards/${cardId}`, {
             method: 'DELETE',
-            headers: {
-                'Authorization': this._getToken(),
-                'Content-Type': 'application/json'
-            },
+            headers: this._getHeaders(),
         }).then(this._checkResponse);
     }
 
     createCard({name, link}) {
         return fetch(this._baseUrl + '/cards', {
             method: 'POST',
-            headers: {
-                'Authorization': this._getToken(),
-                'Content-Type': 'application/json'
-            },
+            headers: this._getHeaders(),
             body: JSON.stringify({
                 name: name,
                 link: link,
@@ -75,25 +57,26 @@ class Api {
     likeCard(cardId) {
         return fetch(this._baseUrl + `/cards/${cardId}/likes`, {
             method: 'PUT',
-            headers: {
-                'Authorization': this._getToken(),
-                'Content-Type': 'application/json'
-            },
+            headers: this._getHeaders(),
         }).then(this._checkResponse);
     }
 
     unlikeCard(cardId) {
         return fetch(this._baseUrl + `/cards/${cardId}/likes`, {
             method: 'DELETE',
-            headers: {
-                'Authorization': this._getToken(),
-                'Content-Type': 'application/json'
-            },
+            headers: this._getHeaders(),
         }).then(this._checkResponse);
     }
 
     _getToken() {
         return `Bearer ${localStorage.getItem('jwt')}`;
+    }
+
+    _getHeaders() {
+        return {
+            'Authorization': this._getToken(),
+            'Content-Type': 'application/json'
+        };
     }
 
     _checkResponse(res) {
