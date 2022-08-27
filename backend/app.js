@@ -29,6 +29,7 @@ app.use(requestLogger); // подключаем логгер запросов
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
   'https://polumnana.frontend.nomoredomains.sbs',
+  'http://polumnana.frontend.nomoredomains.sbs',
   'localhost:3000',
 ];
 
