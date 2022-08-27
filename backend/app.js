@@ -1,4 +1,6 @@
 const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
 const mongoose = require('mongoose');
 const { celebrate, Joi, errors } = require('celebrate');
 const routerUsers = require('./routes/users');
@@ -21,36 +23,10 @@ mongoose
   .then(() => {
   });
 
-// Массив доменов, с которых разрешены кросс-доменные запросы
-const allowedCors = [
-  'https://polumnana.frontend.nomoredomains.sbs',
-  'localhost:3000',
-];
-
-// eslint-disable-next-line consistent-return
-app.use((req, res, next) => {
-  const { origin } = req.headers; // Сохраняем источник запроса в переменную origin
-  const { method } = req; // Сохраняем тип запроса (HTTP-метод) в соответствующую переменную
-  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-  const requestHeaders = req.headers['access-control-request-headers'];
-
-  // проверяем, что источник запроса есть среди разрешённых
-  if (allowedCors.includes(origin)) {
-    // устанавливаем заголовок, который разрешает браузеру запросы с этого источника
-    res.header('Access-Control-Allow-Origin', origin);
-  }
-  if (method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-    res.header('Access-Control-Allow-Headers', requestHeaders);
-    return res.end();
-  }
-
-  next();
-});
-
+app.use(helmet());
 app.use(express.json());
-
 app.use(requestLogger); // подключаем логгер запросов
+app.use(cors());
 
 // роуты, не требующие авторизации
 app.post('/signin', celebrate({
