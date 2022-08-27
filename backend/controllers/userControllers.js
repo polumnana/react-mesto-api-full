@@ -12,7 +12,7 @@ const Statuses = require('../utils/statuses');
 module.exports.getUsers = (req, res, next) => {
   User.find({})
     .then((users) => {
-      res.status(Statuses.ok).send({ data: users });
+      res.status(Statuses.ok).send(users);
     })
     .catch(() => {
       next(new InternalServerError(ErrorsDescription[500]));
@@ -42,9 +42,7 @@ module.exports.createUser = (req, res, next) => {
           })
             .then((user) => {
               res.status(Statuses.created).send({
-                data: {
-                  name: user.name, about: user.about, avatar: user.avatar, email: user.email,
-                },
+                name: user.name, about: user.about, avatar: user.avatar, email: user.email,
               });
             })
             .catch((err) => {
@@ -72,7 +70,7 @@ module.exports.getUserById = (req, res, next) => {
         next(new NotFoundError(ErrorsDescription[404]));
         return;
       }
-      res.status(Statuses.ok).send({ data: user });
+      res.status(Statuses.ok).send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -90,7 +88,7 @@ module.exports.getUserMe = (req, res, next) => {
         next(new NotFoundError(ErrorsDescription[404]));
         return;
       }
-      res.status(Statuses.ok).send({ data: user });
+      res.status(Statuses.ok).send(user);
     })
     .catch(() => {
       next(new InternalServerError(ErrorsDescription[500]));
@@ -112,7 +110,7 @@ module.exports.updateUserInfo = (req, res, next) => {
         next(new NotFoundError(ErrorsDescription[404]));
         return;
       }
-      res.status(Statuses.ok).send({ data: user });
+      res.status(Statuses.ok).send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -138,7 +136,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
         next(new NotFoundError(ErrorsDescription[404]));
         return;
       }
-      res.status(Statuses.ok).send({ data: user });
+      res.status(Statuses.ok).send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
