@@ -1,6 +1,6 @@
-import imageDelete from '../images/Delete.svg';
 import React from 'react';
-import {CurrentUserContext} from '../contexts/CurrentUserContext.js';
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
+import imageDelete from '../images/Delete.svg';
 
 class Card extends React.Component {
     static contextType = CurrentUserContext;
@@ -26,14 +26,14 @@ class Card extends React.Component {
 
     render() {
         // Определяем, являемся ли мы владельцем текущей карточки
-        const isOwn = this.props.card.owner._id === this.context._id;
+        const isOwn = this.props.card.owner === this.context._id;
 
         // Создаём переменную, которую после зададим в `className` для кнопки удаления
         const cardDeleteButtonClassName = (
             `${isOwn ? 'element__delete' : 'element__delete_hidden'}`
         );
         // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-        const isLiked = this.props.card.likes.some(i => i._id === this.context._id);
+        const isLiked = this.props.card.likes.some(i => i === this.context._id);
 
         // Создаём переменную, которую после зададим в `className` для кнопки лайка
         const cardLikeButtonClassName = (

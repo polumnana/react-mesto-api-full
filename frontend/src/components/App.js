@@ -1,26 +1,26 @@
 import React from 'react';
-import {Route, Routes} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
-import Header from './Header.js';
-import Main from './Main.js';
-import Footer from './Footer.js';
-import PopupWithForm from './PopupWithForm.js';
-import ImagePopup from './ImagePopup.js';
-import EditProfilePopup from "./EditProfilePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
+import EditProfilePopup from "./EditProfilePopup";
+import Footer from './Footer.js';
+import Header from './Header.js';
+import ImagePopup from './ImagePopup.js';
+import Main from './Main.js';
+import PopupWithForm from './PopupWithForm.js';
 
-import {CurrentUserContext} from '../contexts/CurrentUserContext';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 import api from "../utils/api";
 import apiAuth from "../utils/apiAuth";
 
 import avatar from "../images/Avatar.jpg";
-import Register from "./Register";
-import Login from "./Login";
 import InfoTooltip from "./InfoTooltip";
+import Login from "./Login";
 import ProtectedRoute from "./ProtectedRoute";
-import {withRouter} from "./withRouter";
+import Register from "./Register";
+import { withRouter } from "./withRouter";
 
 class App extends React.Component {
     constructor(props) {
@@ -63,12 +63,16 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        this.updateCurrentUser();
+    }
+
+    updateCurrentUser() {
         api.fetchUserInfo()
             .then(result => {
-                    this.setState({
-                        currentUser: result,
-                    });
-                }
+                this.setState({
+                    currentUser: result,
+                });
+            }
             )
             .catch(err => {
                 console.log(err);
@@ -92,7 +96,7 @@ class App extends React.Component {
 
     handleCardLike(card) {
         // Снова проверяем, есть ли уже лайк на этой карточке
-        const isLiked = card.likes.some(i => i._id === this.state.currentUser._id);
+        const isLiked = card.likes.some(i => i === this.state.currentUser._id);
         const action = isLiked ? api.unlikeCard(card._id) : api.likeCard(card._id);
         action
             .then((newCard) => {
@@ -177,6 +181,7 @@ class App extends React.Component {
                         token: result.token,
                     });
                     this.props.navigate('/');
+                    this.updateCurrentUser();
                 }
             })
             .catch((err) => {
@@ -208,7 +213,7 @@ class App extends React.Component {
                     if (result) {
                         this.setState({
                             loggedIn: true,
-                            email: result.data.email,
+                            email: result.email,
                         });
                         this.props.navigate('/');
                     }
