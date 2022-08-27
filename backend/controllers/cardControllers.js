@@ -9,7 +9,7 @@ const Statuses = require('../utils/statuses');
 module.exports.getCards = (req, res, next) => {
   Card.find({})
     .then((cards) => {
-      res.status(Statuses.ok).send({ data: cards });
+      res.status(Statuses.ok).send(cards);
     })
     .catch(() => {
       next(new InternalServerError(ErrorsDescription[500]));
@@ -22,7 +22,7 @@ module.exports.createCard = (req, res, next) => {
 
   Card.create({ name, link, owner: ownerCard })
     .then((card) => {
-      res.status(Statuses.created).send({ data: card });
+      res.status(Statuses.created).send(card);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -52,7 +52,7 @@ module.exports.deleteCard = (req, res, next) => {
             next(new NotFoundError(ErrorsDescription[404]));
             return;
           }
-          res.status(Statuses.ok).send({ data: card });
+          res.status(Statuses.ok).send(card);
         })
         .catch(() => {
           next(new InternalServerError(ErrorsDescription[500]));
@@ -78,7 +78,7 @@ module.exports.likeCard = (req, res, next) => {
         next(new NotFoundError(ErrorsDescription[404]));
         return;
       }
-      res.status(Statuses.ok).send({ data: card });
+      res.status(Statuses.ok).send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -100,7 +100,7 @@ module.exports.dislikeCard = (req, res, next) => {
         next(new NotFoundError(ErrorsDescription[404]));
         return;
       }
-      res.status(Statuses.ok).send({ data: card });
+      res.status(Statuses.ok).send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
