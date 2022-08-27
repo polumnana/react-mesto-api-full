@@ -21,6 +21,24 @@ mongoose
   .then(() => {
   });
 
+// Массив доменов, с которых разрешены кросс-доменные запросы
+const allowedCors = [
+  'https://polumnana.frontend.nomoredomains.sbs',
+  'localhost:3000',
+];
+
+app.use((req, res, next) => {
+  const { origin } = req.headers; // Сохраняем источник запроса в переменную origin
+  // проверяем, что источник запроса есть среди разрешённых
+
+  if (allowedCors.includes(origin)) {
+    // устанавливаем заголовок, который разрешает браузеру запросы с этого источника
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+
+  next();
+});
+
 app.use(express.json());
 
 app.use(requestLogger); // подключаем логгер запросов
