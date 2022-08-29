@@ -160,7 +160,11 @@ module.exports.login = (req, res, next) => {
       );
       res.send({ token });
     })
-    .catch(() => {
-      next(new UnauthorizedError(ErrorsDescription[401]));
+    .catch((err) => {
+      if (err.name === 'UnauthorizedError') {
+        next(new UnauthorizedError(ErrorsDescription[401]));
+        return;
+      }
+      next(new InternalServerError(ErrorsDescription[500]));
     });
 };
